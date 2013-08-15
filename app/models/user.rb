@@ -17,6 +17,11 @@ class User < ActiveRecord::Base
       !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
     end
 
+    def avatar_geometry(style = :original)
+      @geometry ||= {}
+      @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
+    end
+
     private
 
     def reprocess_avatar
