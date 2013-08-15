@@ -3,12 +3,13 @@
 <head>
   <title>Imagecrop</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'jquery-1.3.2.min' %>
   <%= csrf_meta_tags %>
+  <%= yield(:head) %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="container">
+    <%= yield %>
+  </div>
 </body>
 </html>

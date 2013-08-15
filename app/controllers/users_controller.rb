@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = 'User was successfully created.'
-      # if params[:user][:avatar].blank?
+      if params[:user][:avatar].blank?
+        flash[:notice] = 'User was successfully created.'
         redirect_to(@user)
-      # else
-        # render :action => 'cropping'
-      # end
+      else
+        render :action => 'crop'
+      end
     else
       render :action => 'new'
     end
@@ -38,18 +38,17 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      flash[:notice] = 'User was successfully updated.'
-      # if params[:user][:avatar].blank?
+      if params[:user][:avatar].blank?
+        flash[:notice] = 'User was successfully updated.'
         redirect_to(@user)
-      # else
-        # render :action => 'cropping'
-      # end
+      else
+        render :action => 'crop'
+      end
     else
       render :action => "edit"
     end
   end
 
-  
   # DELETE /users/1
   def destroy
     @user = User.find(params[:id])
@@ -57,5 +56,5 @@ class UsersController < ApplicationController
 
     redirect_to(users_url)
   end
-  
+
 end
