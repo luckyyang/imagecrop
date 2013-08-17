@@ -24,6 +24,6 @@ In your command line:
 
 == Reference
 
-http://railscasts.com/episodes/134-paperclip
-http://railscasts.com/episodes/182-cropping-images
+* http://railscasts.com/episodes/134-paperclip
+* http://railscasts.com/episodes/182-cropping-images
 
