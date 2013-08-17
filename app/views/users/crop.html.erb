@@ -6,10 +6,16 @@
       $('#cropbox').Jcrop({
         onChange: update_crop,
         onSelect: update_crop,
-        setSelect: [0, 0, 320, 180],
-        aspectRatio: 16/9
+        setSelect: [0, 0, 320, 180],  //设置一个初选框的位置
+        // minSize: [128, 72],  //选择区最小尺寸
+        aspectRatio: 16/9,  //设置选择框高宽比,默认为任意
+        onDblClick: submit_crop
       });
     });
+
+    function submit_crop() {
+      $('#crop_form').attr('form').submit();
+    }
 
     function update_crop(coords) {
       var rx = 320/coords.w;
@@ -40,9 +46,9 @@
 
 <%= form_for @user do |f| %>
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-    <%= f.text_field attribute, :id => attribute %>
+    <%= f.hidden_field attribute, :id => attribute %>
   <% end %>
-  <p><%= f.submit "Crop" %></p>
+  <p><%= f.submit "Crop", :id => "crop_form" %></p>
 <% end %>
 
 <%= link_to 'HOME', users_path %>
